@@ -1,2 +1,7 @@
 build/
 out/
+
+# firtool
+/patch/firtool
+
+/.bloop
