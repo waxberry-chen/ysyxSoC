@@ -20,4 +20,16 @@ module vga_top_apb(
   output        vga_valid
 );
 
+// Explicitly disabled peripheral for the NPC integration profile.
+// Deterministic APB error and benign external outputs; no device functionality.
+assign in_pready = in_psel && in_penable;
+assign in_prdata = 32'b0;
+assign in_pslverr = 1'b1;
+assign vga_r = 0;
+assign vga_g = 0;
+assign vga_b = 0;
+assign vga_hsync = 1;
+assign vga_vsync = 1;
+assign vga_valid = 0;
+
 endmodule

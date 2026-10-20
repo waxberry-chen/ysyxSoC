@@ -53,7 +53,9 @@ class ysyxSoCASIC(implicit p: Parameters) extends LazyModule {
   if (Config.sdramUseAXI) lsdram_axi.get.node := ysyx.AXI4Delayer() := xbar
   else                    lsdram_apb.get.node := apbxbar
   if (Config.hasChipLink) chiplinkNode.get := xbar
-  xbar := cpu.masterNode
+  // Keep address/error policy in the SoC, outside the reusable CPU wrapper.
+  val npcGuard = LazyModule(new NPCAXI4Guard)
+  xbar := npcGuard.node := cpu.masterNode
 
   override lazy val module = new Impl
   class Impl extends LazyModuleImp(this) with DontTouch {

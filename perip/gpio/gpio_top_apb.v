@@ -24,4 +24,19 @@ module gpio_top_apb(
   output [7:0]  gpio_seg_7
 );
 
+// Explicitly disabled peripheral for the NPC integration profile.
+// Deterministic APB error and benign external outputs; no device functionality.
+assign in_pready = in_psel && in_penable;
+assign in_prdata = 32'b0;
+assign in_pslverr = 1'b1;
+assign gpio_out = 16'b0;
+assign gpio_seg_0 = 8'hff;
+assign gpio_seg_1 = 8'hff;
+assign gpio_seg_2 = 8'hff;
+assign gpio_seg_3 = 8'hff;
+assign gpio_seg_4 = 8'hff;
+assign gpio_seg_5 = 8'hff;
+assign gpio_seg_6 = 8'hff;
+assign gpio_seg_7 = 8'hff;
+
 endmodule
